@@ -28,17 +28,14 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
-registerRoute(
-  ({request}) => ["style", "script", "worker"].includes(request.destination),
-  new StaleWhileRevalidate({
-    cacheName: "asset-cache",
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  })
-);
-// registerRoute();
+ registerRoute();
+
+ const urlsToCache = ["/", "app.js", "style.css", "logo.png"];
+ self.addEventListener("install", (event) => {
+  event.waitUntil(async () => {
+    const cache = await caches.open("pwa-assets");
+    return cache.addAll(urlsToCache);
+  });
+ });
 
 
