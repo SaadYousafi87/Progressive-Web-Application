@@ -11,10 +11,7 @@ module.exports = () =>{
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js',
-      // editor: './src/js/editor.js',
-      // header: '/src/js/header.js',
-      // database: '/src/js/database.js',
+      install: './src/js/install.js'
     },
     output: {
       filename: '[name].bundle.js',
@@ -33,22 +30,21 @@ module.exports = () =>{
         swDest: 'src-sw.js',
       }),
 
+      newInjectManifest(),
+
       // Creates a manifest.json file.
       new WebpackPwaManifest({
-        fingerprints: false,
-        inject: true,
-        name: 'J.A.T.E',
-        short_name: 'jate',
+        name: 'Text Editor',
+        short_name: 'J.A.T.E',
         description: 'Text Editor',
         background_color: '#225ca3',
         theme_color: '#225ca3',
-        start_url: './',
         publicPath: './',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
-            destination: path.join('assets', 'icons'),
+            // destination: path.join('assets', 'icons'),
           },
         ],
       }),
@@ -59,10 +55,6 @@ module.exports = () =>{
         {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
-        },
-        {
-          test: /\.(png|svg|jpg|jpeg|git)$/i,
-          type: 'asset/resource',
         },
         {
           test: /\.m?js$/,
