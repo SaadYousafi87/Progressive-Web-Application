@@ -30,7 +30,7 @@ module.exports = () =>{
         swDest: 'src-sw.js',
       }),
 
-      new InjectManifest(),
+      // new InjectManifest(),
 
       // Creates a manifest.json file.
       new WebpackPwaManifest({
