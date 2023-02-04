@@ -20,13 +20,13 @@ export const putDb = async (content) => {
   const jateDb = await openDB('jate', 1);
 
   // Creating new transaction
-  const transac = dateDb.transaction('jate', 'readwrite');
+  const transac = jateDb.transaction('jate', 'readwrite');
 
   // Opening the object store
   const store = transac.objectStore('jate');
 
   // Adding to the store
-  const request = store.add({ content});
+  const request = store.add({content});
 
   // Getting comfirmation
   const result = await request;
