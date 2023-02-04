@@ -35,6 +35,8 @@ module.exports = () =>{
 
       // Creates a manifest.json file.
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: 'Text Editor',
         short_name: 'J.A.T.E',
         description: 'Text Editor',
@@ -45,7 +47,7 @@ module.exports = () =>{
           {
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
-            // destination: path.join('assets', 'icons'),
+            destination: path.join('assets', 'icons'),
           },
         ],
       }),
@@ -59,7 +61,7 @@ module.exports = () =>{
         },
         {
           test: /\.m?js$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /node_modules/,
           // We use babel-loader in order to use ES6.
           use: {
             loader: 'babel-loader',
